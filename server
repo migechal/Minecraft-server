@@ -17,7 +17,7 @@ echo change to true
 nano ~/server/eula.txt
 echo rcon.port = 25575 rcon.password = 0 enable-rcon = true
 nano ~/server/server.properties
-exit
+sudo su - YOUR USER
 echo https://linuxize.com/post/how-to-install-minecraft-server-on-ubuntu-18-04/
 sudo nano /etc/systemd/system/minecraft.service
 sudo systemctl daemon-reload
