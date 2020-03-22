@@ -1,5 +1,3 @@
 # Minecarft-server
 Run
-cd Minecraft-server
-chmod +x server
-./server
+cd Minecraft-server && chmod +x server && ./server
