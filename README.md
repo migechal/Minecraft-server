@@ -1,3 +1,4 @@
 # Minecarft-server
 Run
-cd Minecraft-server && chmod +x server && ./server
+cd Spigot_Server
+sudo ./start.sh
