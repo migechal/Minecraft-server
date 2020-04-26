@@ -15,4 +15,4 @@ sed 's/# enable-rcon=false/enable-rcon=true' server.properties
 echo "#!/bin/bash" > start.sh
 echo java -Xms${g}G -Xm${gb}G -jar BuildTools.jar nogui >> start.sh
 chmod +x start.sh
-echo "This took $SECONDS amount of time"
+echo "This took $SECONDS seconds"
