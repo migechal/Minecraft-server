@@ -13,6 +13,6 @@ java -Xms${g}G -Xmx"${gb}"G -jar BuildTools.jar
 sed 's/# eula=false/eula=true/' eula.txt
 sed 's/# enable-rcon=false/enable-rcon=true' server.properties
 echo "#!/bin/bash" > start.sh
-echo java -Xms${g}G -Xm${gb}G -jar BuildTools.jar nogui >> start.sh
+echo java -Xms${g}G -Xm${gb}G -jar Server/BuildTools.jar nogui >> start.sh
 chmod +x start.sh
 echo "This took $SECONDS seconds"
