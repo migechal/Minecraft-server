@@ -2,7 +2,7 @@
 SETUP:  
 #start  
 mv Minecraft-server/server.sh Desktop  
-cd Desktop/Minecraft-server  
+cd Desktop
 chmod +x server.sh  
 ./server.sh  
 #end  
