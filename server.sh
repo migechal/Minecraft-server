@@ -9,7 +9,7 @@ wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifac
 read -p "How many Gigabits of memory do you want:   " gb
 let "g = $((gb/4))"
 echo $g
-java -Xms${g}G -Xmx"${gb}"G -jar ../BuildTools.jar
+java -Xms${g}G -Xmx"${gb}"G -jar BuildTools.jar
 sed 's/# eula=false/eula=true/' eula.txt
 sed 's/# enable-rcon=false/enable-rcon=true' server.properties
 echo "#!/bin/bash" > start.sh
