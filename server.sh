@@ -1,10 +1,39 @@
 #!/bin/bash
-sudo apt-get update
-sudo apt install 
-sudo apt-get install git openjdk-8-jre-headless
-sudo java -version
-mkdir Server && cd Server
-wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+sudo apt-get update -qq
+progressfilt ()
+{
+    local flag=false c count cr=$'\r' nl=$'\n'
+    while IFS='' read -d '' -rn 1 c
+    do
+        if $flag
+        then
+            printf '%s' "$c"
+        else
+            if [[ $c != $cr && $c != $nl ]]
+            then
+                count=0
+            else
+                ((count++))
+                if ((count > 1))
+                then
+                    flag=true
+                fi
+            fi
+        fi
+    done
+}
+GREEN='\033[0;32m'
+NOTHING='\033[0m'
+sudo apt install -qq
+sudo apt-get install git openjdk-8-jre-headless -qq
+mkdir Server
+echo -e "${GREEN} +Entering Server Directory"
+cd Server
+sleep 2s
+echo -e "+Downloading Server 'BuildTools.jar' ${NOTHING}"
+sleep 2s
+wget --progress=bar:force https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar 2>&1 | progressfilt
+sleep 2s
 HEIGHT=30
 WIDTH=80
 CHOICE_HEIGHT=8
@@ -24,34 +53,11 @@ CHOICE=$(dialog --clear \
                 2>&1 >/dev/tty)
 
 clear
-case $CHOICE in
-        1)
-        	clear
-        	gb=4
-        	$TITLE="How many?(default 4 and 2)"
-        	$OPTIONS=(1 "1"
-        	2 "2"
-        	3 "3"
-        	4 "4"
-        	5 "5"
-        	6 "6"
-        	7 "7"
-        	8 "8"
-        	9 "9"
-        	10 "10")	
-        	CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
 case $CHOICE in 
-	
-		let g=$((gb/4))
-            java -Xms${g}G -Xmx${gb}G -jar BuildTools.jar
+        1)
+            read -p "How many Gigabites of memory do you want:    " gb
+		    let g=$((gb/4))
+            java -Xms${g}G -Xmx${gb}G -jar BuildTools.jar 
             echo java -Xms${g}G -Xm${gb}G -jar Server/BuildTools.jar nogui >> ../start.sh
             ;;
         2)
